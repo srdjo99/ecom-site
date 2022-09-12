@@ -9,8 +9,7 @@
     "react-app/jest",
     "airbnb",
     "airbnb-typescript",
-    "plugin:import/typescript",
-    "plugin:prettier/recommend"
+    "plugin:import/typescript"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -26,6 +25,12 @@
   "rules": {
     "react/jsx-uses-react": ["off"],
     "react/react-in-jsx-scope": ["off"],
-    "react/jsx-props-no-spreading": ["warn"]
+    "react/jsx-props-no-spreading": ["warn"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "@typescript-eslint/naming-convention": ["warn"],
+    "@typescript-eslint/no-use-before-define": ["warn"],
+    "react/jsx-no-constructed-context-values": ["warn"],
+    "react/function-component-definition": ["warn"]
   }
 }

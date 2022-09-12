@@ -16,7 +16,7 @@ type CartContextProps = {};
 
 const CartContext = React.createContext<CartContextProps | null>(null);
 
-export const CartProvider: React.FC<React.ReactNode | any> = ({ children }) => {
+function CartProvider({ children }: any) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
@@ -24,6 +24,9 @@ export const CartProvider: React.FC<React.ReactNode | any> = ({ children }) => {
       {children}
     </CartContext.Provider>
   );
-};
+}
+
+export default CartProvider;
+
 // make sure use
 export const useCartContext = () => useContext(CartContext);
