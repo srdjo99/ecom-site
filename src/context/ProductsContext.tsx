@@ -40,7 +40,7 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  console.log('dev branch');
+  console.log('dev branc22h');
 
   const openSidebar = () => {
     dispatch({ type: SIDEBAR_OPEN });
