@@ -1,11 +1,9 @@
 import React from 'react';
 import { BsFillGridFill, BsList } from 'react-icons/bs';
 import styled from 'styled-components';
-import { useFilterContext } from '../context/filter_context';
+import { useFilterContext } from '../context/FilterContext';
 
-function Sort() {
-  return <h4>sort </h4>;
-}
+const Sort = () => <h4>sort </h4>;
 
 const Wrapper = styled.section`
   display: grid;

@@ -1,7 +1,7 @@
 import React, {
   useEffect, useContext, useReducer, useState,
 } from 'react';
-import reducer from '../reducers/cart_reducer';
+import reducer from '../reducers/CartReducer';
 // import {
 //   ADD_TO_CART,
 //   REMOVE_CART_ITEM,
@@ -16,7 +16,7 @@ type CartContextProps = {};
 
 const CartContext = React.createContext<CartContextProps | null>(null);
 
-function CartProvider({ children }: any) {
+const CartProvider = ({ children }: any) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
@@ -24,7 +24,7 @@ function CartProvider({ children }: any) {
       {children}
     </CartContext.Provider>
   );
-}
+};
 
 export default CartProvider;
 

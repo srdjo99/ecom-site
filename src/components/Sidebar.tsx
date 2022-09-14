@@ -1,16 +1,56 @@
-import React from 'react';
-// import logo from "../assets/logo.svg";
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 import { FaTimes } from 'react-icons/fa';
 import styled from 'styled-components';
-import { useProductsContext } from '../context/products_context';
+import {
+  useProductsContext,
+  ProductsContext,
+} from '../context/ProductsContext';
 import { links } from '../utils/constants';
-// import CartButtons from "./CartButtons";
-import { useUserContext } from '../context/user_context';
+import CartButtons from './CartButtons';
 
-function Sidebar() {
-  return <h4>sidebar</h4>;
-}
+import logo from '../assets/logo.svg';
+
+const Sidebar: React.FC = () => {
+  const { isSidebarOpen, openSidebar, closeSidebar } = useContext(ProductsContext);
+  console.log(isSidebarOpen, openSidebar, closeSidebar);
+
+  // if (data) {
+  //   const { isSidebarOpen, closeSidebar, openSidebar } = data;
+  //   console.log(isSidebarOpen, closeSidebar, openSidebar);
+  // }
+
+  // const isSidebarOpen = true;
+
+  return (
+    <SidebarContainer>
+      <aside
+        className={`${isSidebarOpen ? 'sidebar show-sidebar' : 'sidebar'}`}
+      >
+        <div className="sidebar-header">
+          <img src={logo} alt="comfy sloth" className="logo" />
+          <button className="close-btn" type="button">
+            <FaTimes />
+          </button>
+        </div>
+        <ul className="links">
+          {links.map(({ id, text, url }) => {
+            return (
+              <li key={id}>
+                <Link to={url}>{text}</Link>
+              </li>
+            );
+          })}
+          <li>
+            <Link to="/checkout">checkout</Link>
+          </li>
+        </ul>
+        <CartButtons />
+      </aside>
+    </SidebarContainer>
+  );
+};
 
 const SidebarContainer = styled.div`
   text-align: center;

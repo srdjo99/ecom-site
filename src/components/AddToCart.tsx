@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaCheck } from 'react-icons/fa';
-import { useCartContext } from '../context/cart_context';
+import { useCartContext } from '../context/CartContext';
 import AmountButtons from './AmountButtons';
 
-function AddToCart() {
-  return <h4>addToCart </h4>;
-}
+const AddToCart = () => <h4>addToCart </h4>;
 
 const Wrapper = styled.section`
   margin-top: 2rem;

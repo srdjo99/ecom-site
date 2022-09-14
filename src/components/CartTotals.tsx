@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useCartContext } from '../context/cart_context';
-import { useUserContext } from '../context/user_context';
+import { useCartContext } from '../context/CartContext';
+import { useUserContext } from '../context/UserContext';
 import { formatPrice } from '../utils/helpers';
 
-function CartTotals() {
-  return <h4>cart totals</h4>;
-}
+const CartTotals = () => <h4>cart totals</h4>;
 
 const Wrapper = styled.section`
   margin-top: 3rem;

@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useCartContext } from '../context/cart_context';
+import { useCartContext } from '../context/CartContext';
 import CartColumns from './CartColumns';
 import CartItem from './CartItem';
 import CartTotals from './CartTotals';
 
-function CartContent() {
-  return <h4>cart content </h4>;
-}
+const CartContent = () => <h4>cart content </h4>;
 const Wrapper = styled.section`
   .link-container {
     display: flex;

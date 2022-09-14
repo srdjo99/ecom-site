@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/helpers';
 
-function ListView() {
-  return <h4>list view</h4>;
-}
+const ListView = () => <h4>list view</h4>;
 
 const Wrapper = styled.section`
   display: grid;

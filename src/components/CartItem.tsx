@@ -3,11 +3,9 @@ import styled from 'styled-components';
 import { FaTrash } from 'react-icons/fa';
 import { formatPrice } from '../utils/helpers';
 import AmountButtons from './AmountButtons';
-import { useCartContext } from '../context/cart_context';
+import { useCartContext } from '../context/CartContext';
 
-function CartItem() {
-  return <h4>cart item</h4>;
-}
+const CartItem = () => <h4>cart item</h4>;
 
 const Wrapper = styled.article`
   .subtotal {

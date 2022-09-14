@@ -13,9 +13,7 @@ import { formatPrice } from '../utils/helpers';
 //   PageHero,
 // } from '../components'
 
-function SingleProductPage() {
-  return <h4>single product page</h4>;
-}
+const SingleProductPage = () => <h4>single product page</h4>;
 
 const Wrapper = styled.main`
   .product-center {

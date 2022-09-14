@@ -1,10 +1,8 @@
 import React from 'react';
-import { useFilterContext } from '../context/filter_context';
+import { useFilterContext } from '../context/FilterContext';
 // import GridView from "./GridView";
 // import ListView from "./ListView";
 
-function ProductList() {
-  return <h4>product list</h4>;
-}
+const ProductList = () => <h4>product list</h4>;
 
 export default ProductList;

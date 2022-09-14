@@ -3,9 +3,7 @@ import styled from 'styled-components';
 // import { PageHero } from '../components'
 // import aboutImg from '../assets/hero-bcg.jpeg'
 
-function AboutPage() {
-  return <h4>about page</h4>;
-}
+const AboutPage = () => <h4>about page</h4>;
 
 const Wrapper = styled.section`
   display: grid;

@@ -8,21 +8,17 @@ import {
   useElements,
 } from '@stripe/react-stripe-js';
 import axios from 'axios';
-import { useCartContext } from '../context/cart_context';
-import { useUserContext } from '../context/user_context';
+import { useCartContext } from '../context/CartContext';
+import { useUserContext } from '../context/UserContext';
 import { formatPrice } from '../utils/helpers';
 
-function CheckoutForm() {
-  return <h4>hello from Stripe Checkout </h4>;
-}
+const CheckoutForm = () => <h4>hello from Stripe Checkout </h4>;
 
-function StripeCheckout() {
-  return (
-    <Wrapper>
-      <CheckoutForm />
-    </Wrapper>
-  );
-}
+const StripeCheckout = () => (
+  <Wrapper>
+    <CheckoutForm />
+  </Wrapper>
+);
 
 const Wrapper = styled.section`
   form {
@@ -121,7 +117,7 @@ const Wrapper = styled.section`
   .spinner:before,
   .spinner:after {
     position: absolute;
-    content: "";
+    content: '';
   }
   .spinner:before {
     width: 10.4px;

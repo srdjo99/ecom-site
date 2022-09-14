@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useProductsContext } from '../context/products_context';
+import { useProductsContext } from '../context/ProductsContext';
 // import Error from "./Error";
 import Loading from './Loading';
 import Product from './Product';
 
-function FeaturedProducts() {
-  return <h4>featured products</h4>;
-}
+const FeaturedProducts = () => <h4>featured products</h4>;
 
 const Wrapper = styled.section`
   background: var(--clr-grey-10);

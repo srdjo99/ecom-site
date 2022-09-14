@@ -5,8 +5,6 @@ import styled from 'styled-components';
 // import { useCartContext } from "../context/cart_context";
 import { Link } from 'react-router-dom';
 
-function CheckoutPage() {
-  return <h4>checkout page</h4>;
-}
+const CheckoutPage = () => <h4>checkout page</h4>;
 const Wrapper = styled.div``;
 export default CheckoutPage;

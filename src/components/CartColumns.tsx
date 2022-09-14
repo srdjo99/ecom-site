@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function CartColumns() {
-  return <h4>cart columns</h4>;
-}
+const CartColumns = () => <h4>cart columns</h4>;
 
 const Wrapper = styled.div`
   display: none;

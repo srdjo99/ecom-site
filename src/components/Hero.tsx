@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom';
 // import heroBcg from "../assets/hero-bcg.jpeg";
 // import heroBcg2 from "../assets/hero-bcg-2.jpeg";
 
-function Hero() {
-  return <h4>hero</h4>;
-}
+const Hero = () => <h4>hero</h4>;
 
 const Wrapper = styled.section`
   min-height: 60vh;

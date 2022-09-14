@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 // import { Filters, ProductList, Sort, PageHero } from '../components'
 
-function ProductsPage() {
-  return <h4>products page</h4>;
-}
+const ProductsPage = () => <h4>products page</h4>;
 
 const Wrapper = styled.div`
   .products {

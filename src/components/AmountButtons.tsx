@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
-function AmountButtons() {
-  return <h4>amount buttons </h4>;
-}
+const AmountButtons = () => <h4>amount buttons </h4>;
 
 const Wrapper = styled.div`
   display: grid;

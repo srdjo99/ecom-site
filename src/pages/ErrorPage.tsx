@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function ErrorPage() {
-  return <Wrapper>error page</Wrapper>;
-}
+const ErrorPage = () => <Wrapper>error page</Wrapper>;
 
 const Wrapper = styled.main`
   background: var(--clr-primary-10);

@@ -4,9 +4,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/helpers';
 
-function Product() {
-  return <h4>product</h4>;
-}
+const Product = () => <h4>product</h4>;
 
 const Wrapper = styled.article`
   .container {
