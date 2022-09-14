@@ -36,6 +36,6 @@ export {
   //   Sort,
   //   Stars,
   //   CartContent,
-  //   PageHero,
+  PageHero,
   //   StripeCheckout,
 };
