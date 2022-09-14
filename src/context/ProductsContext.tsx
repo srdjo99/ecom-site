@@ -29,7 +29,7 @@ interface IProductsContextProps {
   closeSidebar: () => void;
 }
 
-export const ProductsContext = React.createContext<IProductsContextProps>({
+const ProductsContext = React.createContext<IProductsContextProps>({
   isSidebarOpen: false,
   openSidebar: () => {},
   closeSidebar: () => {},

@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const PageHero = () => <h4>page hero</h4>;
+type PageHeroProps = {
+  title: string;
+};
+
+const PageHero: FC<PageHeroProps> = ({ title }) => (
+  <Wrapper>
+    <div className="section-center">
+      <h3>
+        <Link to="/">Home</Link>/{title}
+      </h3>
+    </div>
+  </Wrapper>
+);
 
 const Wrapper = styled.section`
   background: var(--clr-primary-10);

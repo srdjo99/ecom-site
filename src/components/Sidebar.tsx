@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { FaTimes } from 'react-icons/fa';
 import styled from 'styled-components';
-import {
-  useProductsContext,
-  ProductsContext,
-} from '../context/ProductsContext';
+import { useProductsContext } from '../context/ProductsContext';
 import { links } from '../utils/constants';
 import CartButtons from './CartButtons';
 
