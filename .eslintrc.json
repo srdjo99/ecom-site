@@ -41,6 +41,8 @@
     "arrow-body-style": ["off"],
     "@typescript-eslint/no-use-before-define": "off",
     "react/jsx-no-constructed-context-values": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "object-curly-newline": "off",
+    "operator-linebreak": "off"
   }
 }
