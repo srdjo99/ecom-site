@@ -1,30 +1,49 @@
-import React from 'react';
 import styled from 'styled-components';
+import { useForm, ValidationError } from '@formspree/react';
 
-const Contact = () => (
-  <Wrapper>
-    <div className="section-center">
-      <h3>Join our newsletter and get 20% off</h3>
-      <div className="content">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-          ipsam voluptatum quod aliquam eos architecto quidem tempore fuga
-          voluptatem cupiditate!
-        </p>
-        <form className="contact-form">
-          <input
-            type="email"
-            className="form-input"
-            placeholder="enter email"
-          />
-          <button type="submit" className="submit-btn">
-            subscribe
-          </button>
-        </form>
+const Contact = () => {
+  const [state, handleSubmit] = useForm('myyvezzy');
+
+  if (state.succeeded) {
+    return <p>Thanks for joining!</p>;
+  }
+
+  return (
+    <Wrapper>
+      <div className="section-center">
+        <h3>Join our newsletter and get 20% off</h3>
+        <div className="content">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+            ipsam voluptatum quod aliquam eos architecto quidem tempore fuga
+            voluptatem cupiditate!
+          </p>
+          <form onSubmit={handleSubmit} className="contact-form">
+            <input
+              id="email"
+              type="email"
+              name="email"
+              className="form-input"
+              placeholder="enter email"
+            />
+            <ValidationError
+              prefix="Email"
+              field="email"
+              errors={state.errors}
+            />
+            <button
+              type="submit"
+              disabled={state.submitting}
+              className="submit-btn"
+            >
+              subscribe
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-  </Wrapper>
-);
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   padding: 5rem 0;
