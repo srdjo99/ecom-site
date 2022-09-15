@@ -19,29 +19,43 @@ const initialState = {
   productsError: false,
   products: [],
   featuredProducts: null,
+  singleProductLoading: false,
+  singleProductError: false,
+  singleProduct: {},
 };
 
 // type ChildrenProps = {
 //   children: React.ReactNode;
 // };
 
+const defaultContextValues = {
+  isSidebarOpen: false,
+  productsError: false,
+  productsLoading: false,
+  productsFeatured: undefined,
+  singleProductLoading: false,
+  singleProductError: false,
+  singleProduct: {},
+  openSidebar: () => {},
+  closeSidebar: () => {},
+  fetchSingleProduct: (url: string) => {},
+};
+
 interface IProductsContextProps {
   isSidebarOpen: boolean;
   productsError: boolean;
   productsLoading: boolean;
   productsFeatured?: any;
+  singleProductLoading: boolean;
+  singleProductError: boolean;
+  singleProduct: {};
   openSidebar: () => void;
   closeSidebar: () => void;
+  fetchSingleProduct: (url: string) => void;
 }
 
-const ProductsContext = React.createContext<IProductsContextProps>({
-  isSidebarOpen: false,
-  productsError: false,
-  productsLoading: false,
-  productsFeatured: undefined,
-  openSidebar: () => {},
-  closeSidebar: () => {},
-});
+const ProductsContext =
+  React.createContext<IProductsContextProps>(defaultContextValues);
 
 export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
   children,
@@ -69,6 +83,20 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
     }
   };
 
+  const fetchSingleProduct = async (url: string) => {
+    dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
+    try {
+      const response = await axios(url);
+      console.log(response);
+
+      const singleProduct = response.data;
+
+      dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
+    } catch (error) {
+      dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
+    }
+  };
+
   useEffect(() => {
     fetchProducts(url);
   }, []);
@@ -81,6 +109,7 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
         ...state,
         closeSidebar,
         openSidebar,
+        fetchSingleProduct,
       }}
     >
       {children}

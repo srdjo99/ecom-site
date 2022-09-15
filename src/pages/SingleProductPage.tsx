@@ -1,19 +1,49 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-// import { useProductsContext } from '../context/products_context'
 import styled from 'styled-components';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+
+import { useProductsContext } from '../context/ProductsContext';
 import { singleProductUrl as url } from '../utils/constants';
 import { formatPrice } from '../utils/helpers';
-// import {
-//   Loading,
-//   Error,
-//   ProductImages,
-//   AddToCart,
-//   Stars,
-//   PageHero,
-// } from '../components'
+import {
+  Loading,
+  Error,
+  ProductImages,
+  AddToCart,
+  Stars,
+  PageHero,
+} from '../components/index';
 
-const SingleProductPage = () => <h4>single product page</h4>;
+const SingleProductPage = () => {
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  const {
+    singleProductLoading: loading,
+    singleProductError: error,
+    singleProduct: product,
+    fetchSingleProduct,
+  } = useProductsContext();
+
+  useEffect(() => {
+    fetchSingleProduct(`s${url}${id}`);
+  }, [id]);
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+    }
+  }, [error]);
+
+  if (loading) return <Loading />;
+
+  if (error) return <Error />;
+
+  return <h4>single product page</h4>;
+};
 
 const Wrapper = styled.main`
   .product-center {
