@@ -1,9 +1,7 @@
 import axios from 'axios';
-import React, {
-  FC, useContext, useEffect, useReducer,
-} from 'react';
+import React, { FC, useContext, useEffect, useReducer } from 'react';
 import reducer from '../reducers/ProductsReducer';
-import { products_url as url } from '../utils/constants';
+import { productsUrl as url } from '../utils/constants';
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -17,6 +15,10 @@ import {
 
 const initialState = {
   isSidebarOpen: false,
+  productsLoading: false,
+  productsError: false,
+  products: [],
+  featuredProducts: [],
 };
 
 // type ChildrenProps = {
@@ -40,8 +42,6 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  console.log('dev branc22h');
-
   const openSidebar = () => {
     dispatch({ type: SIDEBAR_OPEN });
   };
@@ -50,7 +50,22 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
     dispatch({ type: SIDEBAR_CLOSE });
   };
 
-  console.log(children);
+  const fetchProducts = async (url: string) => {
+    dispatch({ type: GET_PRODUCTS_BEGIN });
+    try {
+      const response = await axios.get(url);
+      const products = response.data;
+      console.log(products);
+
+      dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
+    } catch (error) {
+      dispatch({ type: GET_PRODUCTS_ERROR });
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts(url);
+  }, []);
 
   return (
     <ProductsContext.Provider

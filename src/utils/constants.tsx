@@ -39,7 +39,7 @@ export const services = [
   },
 ];
 
-export const products_url = 'https://course-api.com/react-store-products';
+export const productsUrl = 'https://course-api.com/react-store-products';
 
-export const single_product_url =
+export const singleProductUrl =
   'https://course-api.com/react-store-single-product?id=';

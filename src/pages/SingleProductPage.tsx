@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 // import { useProductsContext } from '../context/products_context'
 import styled from 'styled-components';
-import { single_product_url as url } from '../utils/constants';
+import { singleProductUrl as url } from '../utils/constants';
 import { formatPrice } from '../utils/helpers';
 // import {
 //   Loading,
