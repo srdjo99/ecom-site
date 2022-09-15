@@ -18,7 +18,7 @@ const initialState = {
   productsLoading: false,
   productsError: false,
   products: [],
-  featuredProducts: [],
+  featuredProducts: null,
 };
 
 // type ChildrenProps = {
@@ -27,12 +27,18 @@ const initialState = {
 
 interface IProductsContextProps {
   isSidebarOpen: boolean;
+  productsError: boolean;
+  productsLoading: boolean;
+  productsFeatured?: any;
   openSidebar: () => void;
   closeSidebar: () => void;
 }
 
 const ProductsContext = React.createContext<IProductsContextProps>({
   isSidebarOpen: false,
+  productsError: false,
+  productsLoading: false,
+  productsFeatured: undefined,
   openSidebar: () => {},
   closeSidebar: () => {},
 });
@@ -66,6 +72,8 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     fetchProducts(url);
   }, []);
+
+  console.log(state);
 
   return (
     <ProductsContext.Provider

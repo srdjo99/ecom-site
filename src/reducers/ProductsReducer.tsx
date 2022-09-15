@@ -23,6 +23,8 @@ interface IProductsValues {
 
 type ProductsState = {
   isSidebarOpen: boolean;
+  productsLoading: boolean;
+  productsError: boolean;
 };
 
 type ProductsAction = { type: string; payload?: IProductsValues[] };
