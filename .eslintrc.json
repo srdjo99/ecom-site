@@ -43,6 +43,7 @@
     "object-curly-newline": "off",
     "operator-linebreak": "off",
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "off"
+    "@typescript-eslint/no-shadow": "off",
+    "react/require-default-props": "off"
   }
 }

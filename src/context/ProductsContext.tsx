@@ -21,7 +21,7 @@ const initialState = {
   featuredProducts: null,
   singleProductLoading: false,
   singleProductError: false,
-  singleProduct: {},
+  singleProduct: undefined,
 };
 
 // type ChildrenProps = {
@@ -35,11 +35,32 @@ const defaultContextValues = {
   productsFeatured: undefined,
   singleProductLoading: false,
   singleProductError: false,
-  singleProduct: {},
+  singleProduct: undefined,
   openSidebar: () => {},
   closeSidebar: () => {},
   fetchSingleProduct: (url: string) => {},
 };
+
+interface IProductsValues {
+  category: string;
+  colors: string[];
+  description: string;
+  id: string;
+  image: string;
+  price: number;
+  shipping: boolean;
+  featured?: boolean;
+}
+
+interface ISingleProductValues extends IProductsValues {
+  company: string;
+  images: object[];
+  name: string;
+  reviews: number;
+  shipping: boolean;
+  stars: number;
+  stock: number;
+}
 
 interface IProductsContextProps {
   isSidebarOpen: boolean;
@@ -48,7 +69,7 @@ interface IProductsContextProps {
   productsFeatured?: any;
   singleProductLoading: boolean;
   singleProductError: boolean;
-  singleProduct: {};
+  singleProduct?: ISingleProductValues;
   openSidebar: () => void;
   closeSidebar: () => void;
   fetchSingleProduct: (url: string) => void;
@@ -73,9 +94,8 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
   const fetchProducts = async (url: string) => {
     dispatch({ type: GET_PRODUCTS_BEGIN });
     try {
-      const response = await axios.get(url);
+      const response = await axios(url);
       const products = response.data;
-      console.log(products);
 
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
     } catch (error) {
@@ -87,9 +107,9 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
     dispatch({ type: GET_SINGLE_PRODUCT_BEGIN });
     try {
       const response = await axios(url);
-      console.log(response);
-
       const singleProduct = response.data;
+
+      console.log(singleProduct);
 
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
     } catch (error) {
@@ -100,8 +120,6 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     fetchProducts(url);
   }, []);
-
-  console.log(state);
 
   return (
     <ProductsContext.Provider

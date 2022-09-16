@@ -12,7 +12,7 @@ import {
 
 interface IProductsValues {
   category: string;
-  colors: [];
+  colors: string[];
   description: string;
   id: string;
   image: string;
@@ -23,7 +23,7 @@ interface IProductsValues {
 
 interface ISingleProductValues extends IProductsValues {
   company: string;
-  images: [];
+  images: object[];
   name: string;
   reviews: number;
   shipping: boolean;
@@ -37,13 +37,13 @@ type ProductsState = {
   productsError: boolean;
   singleProductLoading: boolean;
   singleProductError: boolean;
-  singleProduct: {};
+  singleProduct?: any;
 };
 
 type ProductsAction = {
   type: string;
-  // payload?: IProductsValues[] | ISingleProductValues;
-  payload?: any;
+  payload?: IProductsValues[] | ISingleProductValues;
+  // payload?: any;
 };
 
 const ProductsReducer = (state: ProductsState, action: ProductsAction) => {
@@ -60,9 +60,17 @@ const ProductsReducer = (state: ProductsState, action: ProductsAction) => {
   }
 
   if (action.type === GET_PRODUCTS_SUCCESS) {
-    const featuredProducts = action.payload?.filter(
-      (product: IProductsValues) => product.featured === true,
-    );
+    // const featuredProducts = action.payload?.filter(
+    //   (product: IProductsValues) => product.featured === true,
+    // );
+
+    let featuredProducts;
+
+    if (action.payload && Array.isArray(action.payload)) {
+      featuredProducts = action.payload.filter(
+        (product: IProductsValues) => product.featured === true,
+      );
+    }
 
     return {
       ...state,
@@ -81,12 +89,10 @@ const ProductsReducer = (state: ProductsState, action: ProductsAction) => {
   }
 
   if (action.type === GET_SINGLE_PRODUCT_SUCCESS) {
-    console.log(`${action.payload}cedocedo`);
-
     return {
       ...state,
       singleProductLoading: false,
-      singleProduct: action.payload,
+      singleProduct: action?.payload,
     };
   }
 

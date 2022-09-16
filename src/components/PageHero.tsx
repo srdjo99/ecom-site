@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 
 type PageHeroProps = {
   title: string;
+  product?: boolean;
 };
 
-const PageHero: FC<PageHeroProps> = ({ title }) => (
+const PageHero: FC<PageHeroProps> = ({ title, product }) => (
   <Wrapper>
     <div className="section-center">
       <h3>
-        <Link to="/">Home</Link>/{title}
+        <Link to="/">Home</Link>
+        {product && <Link to="/products">/Products</Link>}/{title}
       </h3>
     </div>
   </Wrapper>
