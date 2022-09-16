@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 import { useForm, ValidationError } from '@formspree/react';
 
-const Contact = () => {
+const Contact: FC = () => {
   const [state, handleSubmit] = useForm('myyvezzy');
 
   if (state.succeeded) {

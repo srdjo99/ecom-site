@@ -1,11 +1,61 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaCheck } from 'react-icons/fa';
 import { useCartContext } from '../context/CartContext';
 import AmountButtons from './AmountButtons';
 
-const AddToCart = () => <h4>addToCart </h4>;
+// sytnax when passing spreaded props
+// interface IProductProps {
+//   category: string;
+//   colors: string[];
+//   company: string;
+//   description: string;
+//   featured?: boolean;
+//   id: string;
+//   images: object[];
+//   name: string;
+//   price: number;
+//   reviews: number;
+//   stars: number;
+//   stock: number;
+// }
+
+// syntax when passing the whole object as a prop
+interface IProductProps {
+  product: {
+    category: string;
+    colors: string[];
+    company: string;
+    description: string;
+    featured?: boolean;
+    id: string;
+    images: object[];
+    name: string;
+    price: number;
+    reviews: number;
+    stars: number;
+    stock: number;
+  };
+}
+
+const AddToCart: FC<IProductProps> = ({ product }) => {
+  const {
+    name,
+    category,
+    colors,
+    company,
+    description,
+    featured,
+    id,
+    images,
+    price,
+    reviews,
+    stars,
+    stock,
+  } = product;
+  return <h4>{name}</h4>;
+};
 
 const Wrapper = styled.section`
   margin-top: 2rem;
