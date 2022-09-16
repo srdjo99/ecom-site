@@ -65,6 +65,7 @@ const SingleProductPage = () => {
       company,
       images,
     }: ProductTypes = product;
+
     return (
       <Wrapper>
         <PageHero title={name} product />
@@ -76,7 +77,7 @@ const SingleProductPage = () => {
             <ProductImages images={images} />
             <div className="content">
               <h2>{name}</h2>
-              <Stars />
+              <Stars stars={stars} reviews={reviews} />
               <h5 className="price">{formatPrice(price)}</h5>
               <p className="desc">{description}</p>
               <p className="info">

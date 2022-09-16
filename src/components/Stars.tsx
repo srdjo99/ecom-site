@@ -1,8 +1,44 @@
-import React from 'react';
 import styled from 'styled-components';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 
-const Stars = () => <h4>stars</h4>;
+type StarsType = {
+  stars: number;
+  reviews: number;
+};
+
+const Stars = ({ stars, reviews }: StarsType) => {
+  const tempStars = Array.from({ length: 5 }, (_, index) => {
+    const number = index + 0.5;
+
+    if (stars >= index + 1) {
+      return <BsStarFill key={index} />;
+    }
+    if (stars >= number) {
+      return <BsStarHalf key={index} />;
+    }
+    return <BsStar key={index} />;
+
+    // eslint no nested ternary problem
+    // return (
+    //   <span key={index}>
+    //     {stars >= index + 1 ? (
+    //       <BsStarFill />
+    //     ) : stars >= number ? (
+    //       <BsStarHalf />
+    //     ) : (
+    //       <BsStar />
+    //     )}
+    //   </span>
+    // );
+  });
+
+  return (
+    <Wrapper>
+      <div className="stars">{tempStars}</div>
+      <p className="reviews">({reviews} customer reviews)</p>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   display: flex;

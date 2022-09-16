@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { FC, useContext, useEffect, useReducer } from 'react';
+import React, { FC, useContext, useEffect, useReducer, ReactNode } from 'react';
 import reducer from '../reducers/ProductsReducer';
 import { productsUrl as url } from '../utils/constants';
 import {
@@ -24,10 +24,6 @@ const initialState = {
   singleProduct: undefined,
 };
 
-// type ChildrenProps = {
-//   children: React.ReactNode;
-// };
-
 const defaultContextValues = {
   isSidebarOpen: false,
   productsError: false,
@@ -40,6 +36,19 @@ const defaultContextValues = {
   closeSidebar: () => {},
   fetchSingleProduct: (url: string) => {},
 };
+
+interface IProductsContextProps {
+  isSidebarOpen: boolean;
+  productsError: boolean;
+  productsLoading: boolean;
+  productsFeatured?: object[];
+  singleProductLoading: boolean;
+  singleProductError: boolean;
+  singleProduct?: ISingleProductValues;
+  openSidebar: () => void;
+  closeSidebar: () => void;
+  fetchSingleProduct: (url: string) => void;
+}
 
 interface IProductsValues {
   category: string;
@@ -62,25 +71,10 @@ interface ISingleProductValues extends IProductsValues {
   stock: number;
 }
 
-interface IProductsContextProps {
-  isSidebarOpen: boolean;
-  productsError: boolean;
-  productsLoading: boolean;
-  productsFeatured?: any;
-  singleProductLoading: boolean;
-  singleProductError: boolean;
-  singleProduct?: ISingleProductValues;
-  openSidebar: () => void;
-  closeSidebar: () => void;
-  fetchSingleProduct: (url: string) => void;
-}
-
 const ProductsContext =
   React.createContext<IProductsContextProps>(defaultContextValues);
 
-export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const ProductsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const openSidebar = () => {
@@ -96,7 +90,6 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
     try {
       const response = await axios(url);
       const products = response.data;
-
       dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
     } catch (error) {
       dispatch({ type: GET_PRODUCTS_ERROR });
@@ -108,9 +101,6 @@ export const ProductsProvider: FC<{ children: React.ReactNode }> = ({
     try {
       const response = await axios(url);
       const singleProduct = response.data;
-
-      console.log(singleProduct);
-
       dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
     } catch (error) {
       dispatch({ type: GET_SINGLE_PRODUCT_ERROR });

@@ -31,20 +31,26 @@ interface ISingleProductValues extends IProductsValues {
   stock: number;
 }
 
-type ProductsState = {
+interface ProductsState {
   isSidebarOpen: boolean;
   productsLoading: boolean;
   productsError: boolean;
+  products?: IProductsValues[];
   singleProductLoading: boolean;
   singleProductError: boolean;
-  singleProduct?: any;
-};
+  singleProduct?: ISingleProductValues;
+}
 
-type ProductsAction = {
-  type: string;
-  payload?: IProductsValues[] | ISingleProductValues;
-  // payload?: any;
-};
+type ProductsAction =
+  | { type: 'GET_PRODUCTS_SUCCESS'; payload: IProductsValues[] }
+  | { type: 'GET_SINGLE_PRODUCT_SUCCESS'; payload: ISingleProductValues }
+  | { type: 'SIDEBAR_OPEN' }
+  | { type: 'SIDEBAR_CLOSE' }
+  | { type: 'GET_PRODUCTS_BEGIN' }
+  | { type: 'GET_PRODUCTS_ERROR' }
+  | { type: 'GET_SINGLE_PRODUCT_BEGIN' }
+  | { type: 'GET_SINGLE_PRODUCT_ERROR' }
+  | { type: null };
 
 const ProductsReducer = (state: ProductsState, action: ProductsAction) => {
   if (action.type === SIDEBAR_OPEN) {
@@ -60,17 +66,9 @@ const ProductsReducer = (state: ProductsState, action: ProductsAction) => {
   }
 
   if (action.type === GET_PRODUCTS_SUCCESS) {
-    // const featuredProducts = action.payload?.filter(
-    //   (product: IProductsValues) => product.featured === true,
-    // );
-
-    let featuredProducts;
-
-    if (action.payload && Array.isArray(action.payload)) {
-      featuredProducts = action.payload.filter(
-        (product: IProductsValues) => product.featured === true,
-      );
-    }
+    const featuredProducts = action.payload.filter(
+      (product: IProductsValues) => product.featured === true,
+    );
 
     return {
       ...state,
@@ -92,7 +90,7 @@ const ProductsReducer = (state: ProductsState, action: ProductsAction) => {
     return {
       ...state,
       singleProductLoading: false,
-      singleProduct: action?.payload,
+      singleProduct: action.payload,
     };
   }
 
