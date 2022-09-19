@@ -46,11 +46,23 @@ const AddToCart: FC<IProductProps> = ({ product }) => {
   const [amount, setAmount] = useState<number>(1);
 
   const increase = () => {
-    setAmount(amount + 1);
+    setAmount((oldAmount) => {
+      let tempAmount = oldAmount + 1;
+      if (tempAmount > stock) {
+        tempAmount = stock;
+      }
+      return tempAmount;
+    });
   };
 
   const decrease = () => {
-    setAmount(amount - 1);
+    setAmount((oldAmount) => {
+      let tempAmount = oldAmount - 1;
+      if (tempAmount < 1) {
+        tempAmount = 1;
+      }
+      return tempAmount;
+    });
   };
 
   return (
@@ -76,8 +88,11 @@ const AddToCart: FC<IProductProps> = ({ product }) => {
         </div>
       </div>
       <div className="btn-container">
-        <AmountButtons />
-
+        <AmountButtons
+          amount={amount}
+          increase={increase}
+          decrease={decrease}
+        />
         <Link to="/cart" className="btn">
           add to cart
         </Link>
