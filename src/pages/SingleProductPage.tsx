@@ -50,8 +50,7 @@ const SingleProductPage = () => {
   //   }
   // }, [error]);
 
-  // if (error) return <Error />;
-  // if (loading) return <Loading />;
+  if (loading) return <Loading />;
 
   if (product) {
     const {
@@ -101,15 +100,7 @@ const SingleProductPage = () => {
     );
   }
 
-  // const { name } = product;
-  // console.log(name);
-
-  return (
-    <>
-      {loading && <Loading />}
-      {error && <Error />}
-    </>
-  );
+  return <div>{error && <Error />}</div>;
 };
 
 const Wrapper = styled.main`

@@ -101,7 +101,10 @@ export const ProductsProvider: FC<{ children: ReactNode }> = ({ children }) => {
     try {
       const response = await axios(url);
       const singleProduct = response.data;
-      dispatch({ type: GET_SINGLE_PRODUCT_SUCCESS, payload: singleProduct });
+      dispatch({
+        type: 'GET_SINGLE_PRODUCT_SUCCESS',
+        payload: singleProduct,
+      });
     } catch (error) {
       dispatch({ type: GET_SINGLE_PRODUCT_ERROR });
     }

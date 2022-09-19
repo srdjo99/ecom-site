@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FaCheck } from 'react-icons/fa';
@@ -40,21 +40,50 @@ interface IProductProps {
 }
 
 const AddToCart: FC<IProductProps> = ({ product }) => {
-  const {
-    name,
-    category,
-    colors,
-    company,
-    description,
-    featured,
-    id,
-    images,
-    price,
-    reviews,
-    stars,
-    stock,
-  } = product;
-  return <h4>{name}</h4>;
+  const { id, stock, colors } = product;
+
+  const [mainColor, setMainColor] = useState<string>(colors[0]);
+  const [amount, setAmount] = useState<number>(1);
+
+  const increase = () => {
+    setAmount(amount + 1);
+  };
+
+  const decrease = () => {
+    setAmount(amount - 1);
+  };
+
+  return (
+    <Wrapper>
+      <div className="colors">
+        <span> colors : </span>
+        <div>
+          {colors.map((color, index) => {
+            return (
+              <button
+                type="button"
+                key={index}
+                style={{ background: color }}
+                className={`${
+                  mainColor === color ? 'color-btn active' : 'color-btn'
+                }`}
+                onClick={() => setMainColor(color)}
+              >
+                {mainColor === color ? <FaCheck /> : null}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="btn-container">
+        <AmountButtons />
+
+        <Link to="/cart" className="btn">
+          add to cart
+        </Link>
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`
