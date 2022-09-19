@@ -18,9 +18,19 @@ const initialState = {
   allProducts: [],
 };
 
-type FilterContextType = {};
+const defaultFilterContextValues = {
+  filteredProducts: [],
+  allProducts: [],
+};
 
-const FilterContext = React.createContext<FilterContextType | null>(null);
+type FilterContextType = {
+  filteredProducts: object[];
+  allProducts: object[];
+};
+
+const FilterContext = React.createContext<FilterContextType>(
+  defaultFilterContextValues,
+);
 
 export const FilterProvider: FC<{ children: React.ReactNode }> = ({
   children,
@@ -30,11 +40,13 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: LOAD_PRODUCTS, payload: products });
+    if (products) {
+      dispatch({ type: LOAD_PRODUCTS, payload: products });
+    }
   }, [products]);
 
   return (
-    <FilterContext.Provider value="filter context">
+    <FilterContext.Provider value={{ ...state }}>
       {children}
     </FilterContext.Provider>
   );

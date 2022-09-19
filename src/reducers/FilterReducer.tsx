@@ -9,15 +9,25 @@ import {
   CLEAR_FILTERS,
 } from '../actions';
 
-const filterReducer = (state: any, action: any) => {
+type FilterState = {
+  allProducts?: object[];
+  filteredProducts?: object[];
+};
+
+type FilterAction = {
+  type: 'LOAD_PRODUCTS';
+  payload: object[];
+};
+
+const filterReducer = (state: FilterState, action: FilterAction) => {
   if (action.type === LOAD_PRODUCTS) {
     return {
       ...state,
       // this way, both are equal to the prodcuts that are coming
       // from the payload, but with '...' we`re just copying the values
       // we`re NOT referencing to the same place in the memory
+      filteredProducts: [...action.payload],
       allProducts: [...action.payload],
-      filterProducts: [...action.payload],
     };
   }
 

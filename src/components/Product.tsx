@@ -5,14 +5,30 @@ import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/helpers';
 
 type ProductProps = {
-  image: string;
-  name: string;
-  price: number;
-  id: string;
+  image?: string;
+  name?: string;
+  price?: number;
+  id?: string;
+  description?: string;
+  colors?: string[];
+  company?: string;
 };
 
-const Product = ({ image, name, price, id }: ProductProps) => (
+const Product = ({
+  image,
+  name,
+  price,
+  id,
+  description,
+  colors,
+  company,
+}: ProductProps) => (
   <Wrapper>
+    <p>
+      {company}
+      {colors}
+      {description}
+    </p>
     <div className="container">
       <img src={image} alt={name} />
       <Link to={`/products/${id}`} className="link">
@@ -21,7 +37,7 @@ const Product = ({ image, name, price, id }: ProductProps) => (
     </div>
     <footer>
       <h5>{name}</h5>
-      <p>{formatPrice(price)}</p>
+      {price && <p>{formatPrice(price)}</p>}
     </footer>
   </Wrapper>
 );
