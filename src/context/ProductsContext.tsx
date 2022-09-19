@@ -26,6 +26,7 @@ const initialState = {
 
 const defaultContextValues = {
   isSidebarOpen: false,
+  products: [],
   productsError: false,
   productsLoading: false,
   productsFeatured: undefined,
@@ -39,6 +40,7 @@ const defaultContextValues = {
 
 interface IProductsContextProps {
   isSidebarOpen: boolean;
+  products?: object[];
   productsError: boolean;
   productsLoading: boolean;
   productsFeatured?: object[];
