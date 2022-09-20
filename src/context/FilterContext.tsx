@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useReducer, FC } from 'react';
 
-import reducer from '../reducers/FilterReducer';
+import reducer from '../reducers/filterReducer';
 import {
   LOAD_PRODUCTS,
   SET_GRIDVIEW,

@@ -4,14 +4,27 @@ import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/helpers';
 
+// type ProductProps = {
+//   image?: string;
+//   name?: string;
+//   price?: number;
+//   id?: string;
+//   description?: string;
+//   colors?: string[];
+//   company?: string;
+// };
+
 type ProductProps = {
+  id?: string;
+  category?: string;
+  colors?: string[];
+  company?: string;
   image?: string;
   name?: string;
   price?: number;
-  id?: string;
   description?: string;
-  colors?: string[];
-  company?: string;
+  shipping?: boolean;
+  featured?: boolean;
 };
 
 const Product = ({
@@ -19,28 +32,26 @@ const Product = ({
   name,
   price,
   id,
-  description,
   colors,
   company,
-}: ProductProps) => (
-  <Wrapper>
-    <p>
-      {company}
-      {colors}
+  description,
+}: ProductProps) => {
+  return (
+    <Wrapper>
+      <div className="container">
+        <img src={image} alt={name} />
+        <Link to={`/products/${id}`} className="link">
+          <FaSearch />
+        </Link>
+      </div>
+      <footer>
+        <h5>{name}</h5>
+        {price && <p>{formatPrice(price)}</p>}
+      </footer>
       {description}
-    </p>
-    <div className="container">
-      <img src={image} alt={name} />
-      <Link to={`/products/${id}`} className="link">
-        <FaSearch />
-      </Link>
-    </div>
-    <footer>
-      <h5>{name}</h5>
-      {price && <p>{formatPrice(price)}</p>}
-    </footer>
-  </Wrapper>
-);
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.article`
   .container {

@@ -15,11 +15,11 @@ interface ISingleProductProps {
   featured?: boolean;
 }
 
-const GridView: FC<{ products: ISingleProductProps[] }> = ({ products }) => (
+const GridView = ({ products }: { products: ISingleProductProps[] }) => (
   <Wrapper>
     <div className="products-container">
-      {products?.map((product) => {
-        return <Product key={product.id} {...products} />;
+      {products.map((product) => {
+        return <Product key={product.id} {...product} />;
       })}
     </div>
   </Wrapper>
