@@ -17,22 +17,27 @@ const initialState = {
   filteredProducts: [],
   allProducts: [],
   gridView: true,
+  sort: 'price-lowest',
 };
 
 const defaultFilterContextValues = {
   filteredProducts: [],
   allProducts: [],
   gridView: true,
+  sort: 'price-lowest',
   setGridView: () => {},
   setListView: () => {},
+  updateSort: (e: any) => {},
 };
 
 interface IFilterContextType {
   filteredProducts: object[];
   allProducts: object[];
   gridView: boolean;
+  sort: string;
   setGridView: () => void;
   setListView: () => void;
+  updateSort: (e: any) => void;
 }
 
 const FilterContext = React.createContext<IFilterContextType>(
@@ -52,12 +57,25 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
     }
   }, [products]);
 
+  useEffect(() => {
+    dispatch({ type: SORT_PRODUCTS });
+  }, [products, state.sort]);
+
   const setGridView = () => dispatch({ type: SET_GRIDVIEW });
 
   const setListView = () => dispatch({ type: SET_LISTVIEW });
 
+  const updateSort = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // for select, name does not matter, but later it will
+    const { name, value } = e.target;
+
+    dispatch({ type: UPDATE_SORT, payload: value });
+  };
+
   return (
-    <FilterContext.Provider value={{ ...state, setGridView, setListView }}>
+    <FilterContext.Provider
+      value={{ ...state, setGridView, setListView, updateSort }}
+    >
       {children}
     </FilterContext.Provider>
   );
