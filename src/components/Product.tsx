@@ -4,27 +4,17 @@ import { FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/helpers';
 
-// type ProductProps = {
-//   image?: string;
-//   name?: string;
-//   price?: number;
-//   id?: string;
-//   description?: string;
-//   colors?: string[];
-//   company?: string;
-// };
-
 type ProductProps = {
   id?: string;
-  category?: string;
+  // category?: string;
   colors?: string[];
   company?: string;
   image?: string;
   name?: string;
   price?: number;
   description?: string;
-  shipping?: boolean;
-  featured?: boolean;
+  // shipping?: boolean;
+  // featured?: boolean;
 };
 
 const Product = ({
@@ -48,7 +38,6 @@ const Product = ({
         <h5>{name}</h5>
         {price && <p>{formatPrice(price)}</p>}
       </footer>
-      {description}
     </Wrapper>
   );
 };

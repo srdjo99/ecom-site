@@ -12,6 +12,7 @@ import {
 type FilterState = {
   allProducts?: object[];
   filteredProducts?: object[];
+  gridView: boolean;
 };
 
 type FilterAction = {

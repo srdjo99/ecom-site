@@ -16,16 +16,19 @@ import { useProductsContext } from './ProductsContext';
 const initialState = {
   filteredProducts: [],
   allProducts: [],
+  gridView: true,
 };
 
 const defaultFilterContextValues = {
   filteredProducts: [],
   allProducts: [],
+  gridView: true,
 };
 
 type FilterContextType = {
   filteredProducts: object[];
   allProducts: object[];
+  gridView: boolean;
 };
 
 const FilterContext = React.createContext<FilterContextType>(
