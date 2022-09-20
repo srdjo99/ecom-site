@@ -10,15 +10,19 @@ import {
 } from '../actions';
 
 type FilterState = {
-  allProducts?: object[];
-  filteredProducts?: object[];
+  allProducts: object[];
+  filteredProducts: object[];
   gridView: boolean;
 };
 
-type FilterAction = {
-  type: 'LOAD_PRODUCTS';
-  payload: object[];
-};
+type FilterAction =
+  | { type: 'SET_LISTVIEW' }
+  | { type: 'SET_GRIDVIEW' }
+  | {
+      type: 'LOAD_PRODUCTS';
+      payload: object[];
+    }
+  | { type: null };
 
 const filterReducer = (state: FilterState, action: FilterAction) => {
   if (action.type === LOAD_PRODUCTS) {
@@ -29,6 +33,20 @@ const filterReducer = (state: FilterState, action: FilterAction) => {
       // we`re NOT referencing to the same place in the memory
       filteredProducts: [...action.payload],
       allProducts: [...action.payload],
+    };
+  }
+
+  if (action.type === SET_GRIDVIEW) {
+    return {
+      ...state,
+      gridView: true,
+    };
+  }
+
+  if (action.type === SET_LISTVIEW) {
+    return {
+      ...state,
+      gridView: false,
     };
   }
 

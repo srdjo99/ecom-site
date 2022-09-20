@@ -23,15 +23,19 @@ const defaultFilterContextValues = {
   filteredProducts: [],
   allProducts: [],
   gridView: true,
+  setGridView: () => {},
+  setListView: () => {},
 };
 
-type FilterContextType = {
+interface IFilterContextType {
   filteredProducts: object[];
   allProducts: object[];
   gridView: boolean;
-};
+  setGridView: () => void;
+  setListView: () => void;
+}
 
-const FilterContext = React.createContext<FilterContextType>(
+const FilterContext = React.createContext<IFilterContextType>(
   defaultFilterContextValues,
 );
 
@@ -48,8 +52,12 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
     }
   }, [products]);
 
+  const setGridView = () => dispatch({ type: SET_GRIDVIEW });
+
+  const setListView = () => dispatch({ type: SET_LISTVIEW });
+
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider value={{ ...state, setGridView, setListView }}>
       {children}
     </FilterContext.Provider>
   );

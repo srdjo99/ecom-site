@@ -79,13 +79,9 @@ const ProductsContext =
 export const ProductsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const openSidebar = () => {
-    dispatch({ type: SIDEBAR_OPEN });
-  };
+  const openSidebar = () => dispatch({ type: SIDEBAR_OPEN });
 
-  const closeSidebar = () => {
-    dispatch({ type: SIDEBAR_CLOSE });
-  };
+  const closeSidebar = () => dispatch({ type: SIDEBAR_CLOSE });
 
   const fetchProducts = async (url: string) => {
     dispatch({ type: GET_PRODUCTS_BEGIN });
