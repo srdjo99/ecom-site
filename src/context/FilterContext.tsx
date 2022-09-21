@@ -114,6 +114,9 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
     if (name === 'category') {
       value = e.target.textContent as string;
     }
+    if (name === 'color') {
+      value = e.target.dataset.color as string;
+    }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
