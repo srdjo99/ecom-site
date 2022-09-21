@@ -35,9 +35,32 @@ const defaultFilterContextValues = {
   allProducts: [],
   gridView: true,
   sort: 'price-lowest',
+  filters: {
+    text: '',
+    company: 'all',
+    category: 'all',
+    color: 'all',
+    minPrice: 0,
+    maxPrice: 0,
+    price: 0,
+    shipping: false,
+  },
   setGridView: () => {},
   setListView: () => {},
   updateSort: (e: any) => {},
+  updateFilters: (e: any) => {},
+  clearFilters: () => {},
+};
+
+type FiltersTypes = {
+  text: string;
+  company: string;
+  category: string;
+  color: string;
+  minPrice: number;
+  maxPrice: number;
+  price: number;
+  shipping: boolean;
 };
 
 interface IFilterContextType {
@@ -45,9 +68,12 @@ interface IFilterContextType {
   allProducts: object[];
   gridView: boolean;
   sort: string;
+  filters: FiltersTypes;
   setGridView: () => void;
   setListView: () => void;
   updateSort: (e: any) => void;
+  updateFilters: (e: any) => void;
+  clearFilters: () => void;
 }
 
 const FilterContext = React.createContext<IFilterContextType>(
@@ -68,8 +94,9 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
   }, [products]);
 
   useEffect(() => {
+    dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
-  }, [products, state.sort]);
+  }, [products, state.sort, state.filters]);
 
   const setGridView = () => dispatch({ type: SET_GRIDVIEW });
 
@@ -78,13 +105,26 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
   const updateSort = (e: React.ChangeEvent<HTMLInputElement>) => {
     // for select, name does not matter, but later it will
     const { name, value } = e.target;
-
     dispatch({ type: UPDATE_SORT, payload: value });
   };
 
+  const updateFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
+  };
+
+  const clearFilters = () => {};
+
   return (
     <FilterContext.Provider
-      value={{ ...state, setGridView, setListView, updateSort }}
+      value={{
+        ...state,
+        setGridView,
+        setListView,
+        updateSort,
+        updateFilters,
+        clearFilters,
+      }}
     >
       {children}
     </FilterContext.Provider>

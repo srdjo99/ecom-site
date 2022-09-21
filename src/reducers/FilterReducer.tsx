@@ -27,10 +27,10 @@ type FilterState = {
   filteredProducts: ISingleProductProps[];
   gridView: boolean;
   sort: string;
-  filters: FilterTypes;
+  filters: FiltersTypes;
 };
 
-type FilterTypes = {
+type FiltersTypes = {
   text: string;
   company: string;
   category: string;
@@ -39,6 +39,11 @@ type FilterTypes = {
   maxPrice: number;
   price: number;
   shipping: boolean;
+};
+
+type UpdateFiltersPayload = {
+  name: string;
+  value: string;
 };
 
 type FilterAction =
@@ -50,6 +55,8 @@ type FilterAction =
       payload: ISingleProductProps[];
     }
   | { type: 'SORT_PRODUCTS' }
+  | { type: 'UPDATE_FILTERS'; payload: UpdateFiltersPayload }
+  | { type: 'FILTER_PRODUCTS' }
   | { type: null };
 
 const filterReducer = (state: FilterState, action: FilterAction) => {
@@ -132,6 +139,22 @@ const filterReducer = (state: FilterState, action: FilterAction) => {
 
       return { ...state, filteredProducts: tempProducts };
     }
+
+    case UPDATE_FILTERS: {
+      const { name, value } = action.payload;
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [name]: value,
+        },
+      };
+    }
+    case FILTER_PRODUCTS: {
+      console.log('filtering products');
+      return { ...state };
+    }
+
     default:
       throw new Error(`No Matching "${action.type}" - action type`);
   }
