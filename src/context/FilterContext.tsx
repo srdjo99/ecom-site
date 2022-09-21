@@ -110,12 +110,15 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
 
   const updateFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
-    let { value } = e.target;
+    let { value }: { value: string | number } = e.target;
     if (name === 'category') {
       value = e.target.textContent as string;
     }
     if (name === 'color') {
       value = e.target.dataset.color as string;
+    }
+    if (name === 'price') {
+      value = Number(value) as number;
     }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };

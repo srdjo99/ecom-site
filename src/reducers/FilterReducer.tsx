@@ -43,7 +43,7 @@ type FiltersTypes = {
 
 type UpdateFiltersPayload = {
   name: string;
-  value: string;
+  value: string | number;
 };
 
 type FilterAction =
