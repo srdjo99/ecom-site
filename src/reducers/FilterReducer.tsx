@@ -152,7 +152,55 @@ const filterReducer = (state: FilterState, action: FilterAction) => {
       };
     }
     case FILTER_PRODUCTS: {
-      return { ...state };
+      const { allProducts }: { allProducts: ISingleProductProps[] } = state;
+      const { text, category, company, color, price, shipping } = state.filters;
+      // should always start with the 'fresh' set of data
+      // where we have all products
+      // if one of the conditions is not met, we simply return
+      // the array we copied below
+      let tempProducts = [...allProducts];
+      // filtering
+      if (text) {
+        tempProducts = tempProducts.filter((product) => {
+          return product?.name?.toLowerCase().startsWith(text);
+        });
+      }
+
+      // category
+      if (category !== 'all') {
+        tempProducts = tempProducts.filter((product) => {
+          return product.category === category;
+        });
+      }
+
+      // company
+      if (company !== 'all') {
+        tempProducts = tempProducts.filter((product) => {
+          return product.company === company;
+        });
+      }
+
+      // colors
+      if (color !== 'all') {
+        tempProducts = tempProducts.filter((product) => {
+          return product?.colors?.find((col) => col === color);
+        });
+      }
+
+      // price
+      if (price) {
+        tempProducts = tempProducts.filter((product) => {
+          return product.price && product.price <= price;
+        });
+      }
+      // shipping
+      if (shipping) {
+        tempProducts = tempProducts.filter((product) => {
+          return product.shipping === true;
+        });
+      }
+
+      return { ...state, filteredProducts: tempProducts };
     }
 
     case CLEAR_FILTERS: {

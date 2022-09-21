@@ -111,6 +111,7 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
   const updateFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     let { value }: { value: string | number | boolean } = e.target;
+
     if (name === 'category') {
       value = e.target.textContent as string;
     }
