@@ -151,7 +151,6 @@ const filterReducer = (state: FilterState, action: FilterAction) => {
       };
     }
     case FILTER_PRODUCTS: {
-      console.log('filtering products');
       return { ...state };
     }
 
