@@ -110,7 +110,7 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
 
   const updateFilters = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
-    let { value }: { value: string | number } = e.target;
+    let { value }: { value: string | number | boolean } = e.target;
     if (name === 'category') {
       value = e.target.textContent as string;
     }
@@ -118,12 +118,17 @@ export const FilterProvider: FC<{ children: React.ReactNode }> = ({
       value = e.target.dataset.color as string;
     }
     if (name === 'price') {
-      value = Number(value) as number;
+      value = Number(value);
+    }
+    if (name === 'shipping') {
+      value = e.target.checked;
     }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
-  const clearFilters = () => {};
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
 
   return (
     <FilterContext.Provider

@@ -43,7 +43,7 @@ type FiltersTypes = {
 
 type UpdateFiltersPayload = {
   name: string;
-  value: string | number;
+  value: string | number | boolean;
 };
 
 type FilterAction =
@@ -57,6 +57,7 @@ type FilterAction =
   | { type: 'SORT_PRODUCTS' }
   | { type: 'UPDATE_FILTERS'; payload: UpdateFiltersPayload }
   | { type: 'FILTER_PRODUCTS' }
+  | { type: 'CLEAR_FILTERS' }
   | { type: null };
 
 const filterReducer = (state: FilterState, action: FilterAction) => {
@@ -152,6 +153,21 @@ const filterReducer = (state: FilterState, action: FilterAction) => {
     }
     case FILTER_PRODUCTS: {
       return { ...state };
+    }
+
+    case CLEAR_FILTERS: {
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          text: '',
+          company: 'all',
+          category: 'all',
+          color: 'all',
+          price: state.filters.maxPrice,
+          shipping: false,
+        },
+      };
     }
 
     default:
