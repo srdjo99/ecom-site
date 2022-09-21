@@ -6,13 +6,16 @@ import './index.css';
 import App from './App';
 import { ProductsProvider } from './context/ProductsContext';
 import { FilterProvider } from './context/FilterContext';
+import CartProvider from './context/CartContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ProductsProvider>
         <FilterProvider>
-          <App />
+          <CartProvider>
+            <App />
+          </CartProvider>
         </FilterProvider>
       </ProductsProvider>
     </Router>

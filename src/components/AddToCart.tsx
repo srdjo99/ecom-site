@@ -40,6 +40,7 @@ interface IProductProps {
 }
 
 const AddToCart: FC<IProductProps> = ({ product }) => {
+  const { addToCart } = useCartContext();
   const { id, stock, colors } = product;
 
   const [mainColor, setMainColor] = useState<string>(colors[0]);
@@ -93,7 +94,11 @@ const AddToCart: FC<IProductProps> = ({ product }) => {
           increase={increase}
           decrease={decrease}
         />
-        <Link to="/cart" className="btn">
+        <Link
+          to="/cart"
+          className="btn"
+          onClick={() => addToCart(id, mainColor, amount, product)}
+        >
           add to cart
         </Link>
       </div>
