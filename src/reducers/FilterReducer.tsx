@@ -27,6 +27,18 @@ type FilterState = {
   filteredProducts: ISingleProductProps[];
   gridView: boolean;
   sort: string;
+  filters: FilterTypes;
+};
+
+type FilterTypes = {
+  text: string;
+  company: string;
+  category: string;
+  color: string;
+  minPrice: number;
+  maxPrice: number;
+  price: number;
+  shipping: boolean;
 };
 
 type FilterAction =
@@ -35,14 +47,19 @@ type FilterAction =
   | { type: 'UPDATE_SORT'; payload: string }
   | {
       type: 'LOAD_PRODUCTS';
-      payload: object[];
+      payload: ISingleProductProps[];
     }
   | { type: 'SORT_PRODUCTS' }
   | { type: null };
 
 const filterReducer = (state: FilterState, action: FilterAction) => {
   switch (action.type) {
-    case LOAD_PRODUCTS:
+    case LOAD_PRODUCTS: {
+      const maxPriceArr = action.payload.map(
+        (product) => product.price as number,
+      );
+      const maxPrice = Math.max(...maxPriceArr);
+
       return {
         ...state,
         // this way, both are equal to the prodcuts that are coming
@@ -50,8 +67,13 @@ const filterReducer = (state: FilterState, action: FilterAction) => {
         // we`re NOT referencing to the same place in the memory
         filteredProducts: [...action.payload],
         allProducts: [...action.payload],
+        filters: {
+          ...state.filters,
+          maxPrice,
+          price: maxPrice,
+        },
       };
-
+    }
     case SET_GRIDVIEW:
       return {
         ...state,
