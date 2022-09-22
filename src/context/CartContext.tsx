@@ -34,7 +34,7 @@ const defaultContextValues = {
 };
 
 type CartContextTypes = {
-  cart?: any;
+  cart: any[];
   totalItems?: number;
   totalAmount?: number;
   shippingFee?: number;
