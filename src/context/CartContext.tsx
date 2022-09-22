@@ -32,17 +32,20 @@ const initialState = {
 };
 
 const defaultContextValues = {
-  cart: [],
+  cart: getLocalStorage(),
   totalItems: 0,
   totalAmount: 0,
   shippingFee: 534,
   // isLoading: false,
   // setIsLoading: () => {},
   addToCart: () => {},
+  removeItem: (id: string) => {},
+  toggleAmount: (id: string, value: any) => {},
+  clearCart: () => {},
 };
 
 type CartContextTypes = {
-  cart: any[];
+  cart: any[] | any;
   totalItems?: number;
   totalAmount?: number;
   shippingFee?: number;
@@ -50,6 +53,9 @@ type CartContextTypes = {
   // setIsLoading: Dispatch<SetStateAction<boolean>>;
   // addToCart: (id: any, color: any, amount: any, product: any) => void;
   addToCart: (...args: any) => void;
+  removeItem: (id: string) => void;
+  toggleAmount: (id: string, value: any) => void;
+  clearCart: () => void;
 };
 
 type AddToCartTypes = {
