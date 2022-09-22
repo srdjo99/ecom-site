@@ -16,8 +16,16 @@ import {
   COUNT_CART_TOTALS,
 } from '../actions';
 
+const getLocalStorage = () => {
+  const cart = localStorage.getItem('cart');
+  if (cart) {
+    return JSON.stringify(localStorage.getItem('cart'));
+  }
+  return [];
+};
+
 const initialState = {
-  cart: [],
+  cart: getLocalStorage(),
   totalItems: 0,
   totalAmount: 0,
   shippingFee: 534,
@@ -69,8 +77,23 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
+  // remove item
+  const removeItem = (id: string) => {};
+
+  // toggle amount
+  const toggleAmount = (id: string, value: any) => {};
+
+  // clear cart
+  const clearCart = () => {};
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(state.cart));
+  }, [state.cart]);
+
   return (
-    <CartContext.Provider value={{ ...state, addToCart }}>
+    <CartContext.Provider
+      value={{ ...state, addToCart, removeItem, toggleAmount, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );
