@@ -1,11 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaTrash } from 'react-icons/fa';
+
 import { formatPrice } from '../utils/helpers';
 import AmountButtons from './AmountButtons';
 import { useCartContext } from '../context/CartContext';
 
-const CartItem = () => <h4>cart item</h4>;
+type CartItemProps = {
+  id?: string | any;
+  image?: string | any;
+  name?: string | any;
+  color?: any[] | any;
+  price?: number | any;
+  amount?: number | any;
+};
+
+const CartItem: React.FC<CartItemProps> = ({
+  id,
+  image,
+  name,
+  color,
+  price,
+  amount,
+}) => {
+  const { removeItem, toggleAmount } = useCartContext();
+  const increase = () => {};
+  const decrease = () => {};
+
+  return (
+    <Wrapper>
+      <div className="title">
+        <img src={image} alt={name} />
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.article`
   .subtotal {

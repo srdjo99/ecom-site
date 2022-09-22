@@ -1,11 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
 import { useCartContext } from '../context/CartContext';
 import { useUserContext } from '../context/UserContext';
 import { formatPrice } from '../utils/helpers';
 
-const CartTotals = () => <h4>cart totals</h4>;
+const CartTotals = () => {
+  const { totalAmount, shippingFee } = useCartContext();
+
+  const total: number = totalAmount + shippingFee;
+
+  return (
+    <Wrapper>
+      <div>
+        <article>
+          <h5>
+            subtotal: <span>{totalAmount && formatPrice(totalAmount)}</span>
+          </h5>
+          <p>
+            shipping fee: <span>{shippingFee && formatPrice(shippingFee)}</span>
+          </p>
+          <hr />
+          <h4>
+            order total:
+            <span>{total && formatPrice(total)}</span>
+          </h4>
+        </article>
+        <Link to="/checkout" className="btn">
+          proceed to checkout
+        </Link>
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   margin-top: 3rem;

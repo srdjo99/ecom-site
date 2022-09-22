@@ -17,9 +17,10 @@ import {
 } from '../actions';
 
 const getLocalStorage = () => {
-  const cart = localStorage.getItem('cart');
+  let cart = localStorage.getItem('cart');
   if (cart) {
-    return JSON.stringify(localStorage.getItem('cart'));
+    cart = JSON.parse(cart);
+    return cart;
   }
   return [];
 };
@@ -46,9 +47,9 @@ const defaultContextValues = {
 
 type CartContextTypes = {
   cart: any[] | any;
-  totalItems?: number;
-  totalAmount?: number;
-  shippingFee?: number;
+  totalItems: number;
+  totalAmount: number;
+  shippingFee: number;
   // isLoading: boolean;
   // setIsLoading: Dispatch<SetStateAction<boolean>>;
   // addToCart: (id: any, color: any, amount: any, product: any) => void;
@@ -56,13 +57,6 @@ type CartContextTypes = {
   removeItem: (id: string) => void;
   toggleAmount: (id: string, value: any) => void;
   clearCart: () => void;
-};
-
-type AddToCartTypes = {
-  id: string;
-  mainColor: string | any;
-  amount: number;
-  product: any;
 };
 
 const CartContext = React.createContext<CartContextTypes>(defaultContextValues);
