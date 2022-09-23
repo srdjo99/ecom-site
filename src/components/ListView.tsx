@@ -3,7 +3,39 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/helpers';
 
-const ListView = () => <h4>list view</h4>;
+interface ISingleProductProps {
+  id?: string;
+  category?: string;
+  colors?: string[];
+  company?: string;
+  image?: string;
+  name?: string;
+  price?: number;
+  description?: string;
+  shipping?: boolean;
+  featured?: boolean;
+}
+
+const ListView = ({ products }: { products: ISingleProductProps[] }) => (
+  <Wrapper>
+    {products.map((product) => {
+      const { id, image, name, price, description } = product;
+      return (
+        <article key={id}>
+          <img src={image} alt={name} />
+          <div>
+            <h4>{name}</h4>
+            <h5>{price && formatPrice(price)}</h5>
+            <p>{description?.substring(0, 150)}...</p>
+            <Link to={`/product/${id}`} className="btn">
+              Details
+            </Link>
+          </div>
+        </article>
+      );
+    })}
+  </Wrapper>
+);
 
 const Wrapper = styled.section`
   display: grid;

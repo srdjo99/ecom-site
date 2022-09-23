@@ -3,25 +3,14 @@ import { Link } from 'react-router-dom';
 
 import { FaTimes } from 'react-icons/fa';
 import styled from 'styled-components';
-import {
-  useProductsContext,
-  ProductsContext,
-} from '../context/ProductsContext';
+import { useProductsContext } from '../context/ProductsContext';
 import { links } from '../utils/constants';
 import CartButtons from './CartButtons';
 
 import logo from '../assets/logo.svg';
 
 const Sidebar: React.FC = () => {
-  const { isSidebarOpen, openSidebar, closeSidebar } = useContext(ProductsContext);
-  console.log(isSidebarOpen, openSidebar, closeSidebar);
-
-  // if (data) {
-  //   const { isSidebarOpen, closeSidebar, openSidebar } = data;
-  //   console.log(isSidebarOpen, closeSidebar, openSidebar);
-  // }
-
-  // const isSidebarOpen = true;
+  const { isSidebarOpen, openSidebar, closeSidebar } = useProductsContext();
 
   return (
     <SidebarContainer>
@@ -30,7 +19,7 @@ const Sidebar: React.FC = () => {
       >
         <div className="sidebar-header">
           <img src={logo} alt="comfy sloth" className="logo" />
-          <button className="close-btn" type="button">
+          <button className="close-btn" type="button" onClick={closeSidebar}>
             <FaTimes />
           </button>
         </div>
@@ -38,12 +27,16 @@ const Sidebar: React.FC = () => {
           {links.map(({ id, text, url }) => {
             return (
               <li key={id}>
-                <Link to={url}>{text}</Link>
+                <Link to={url} onClick={closeSidebar}>
+                  {text}
+                </Link>
               </li>
             );
           })}
           <li>
-            <Link to="/checkout">checkout</Link>
+            <Link to="/checkout" onClick={closeSidebar}>
+              checkout
+            </Link>
           </li>
         </ul>
         <CartButtons />

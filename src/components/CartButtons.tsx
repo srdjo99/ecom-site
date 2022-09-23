@@ -6,21 +6,25 @@ import { useProductsContext } from '../context/ProductsContext';
 import { useCartContext } from '../context/CartContext';
 import { useUserContext } from '../context/UserContext';
 
-const CartButtons = () => (
-  <Wrapper className="cart-btn-wrapper">
-    <Link to="/cart" className="cart-btn">
-      Cart
-      <span className="cart-container">
-        <FaShoppingCart />
-        <span className="cart-value">12</span>
-      </span>
-    </Link>
-    <button type="button" className="auth-btn">
-      Login
-      <FaUserPlus />
-    </button>
-  </Wrapper>
-);
+const CartButtons = () => {
+  const { closeSidebar } = useProductsContext();
+
+  return (
+    <Wrapper className="cart-btn-wrapper">
+      <Link to="/cart" className="cart-btn" onClick={closeSidebar}>
+        Cart
+        <span className="cart-container">
+          <FaShoppingCart />
+          <span className="cart-value">12</span>
+        </span>
+      </Link>
+      <button type="button" className="auth-btn">
+        Login
+        <FaUserPlus />
+      </button>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.div`
   display: grid;

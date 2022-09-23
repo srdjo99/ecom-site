@@ -1,5 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 
-const Error = () => <h4>error element</h4>;
+const Error: FC = () => (
+  <div className="section section-center text-center">
+    <h2>there was an error.</h2>
+  </div>
+);
 
 export default Error;
