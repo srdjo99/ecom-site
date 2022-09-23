@@ -76,6 +76,25 @@ const cartReducer = (state: any, action: any) => {
       return { ...state, cart: tempCart };
     }
 
+    case COUNT_CART_TOTALS: {
+      const { totalItems, totalAmount } = state.cart.reduce(
+        (total: any, cartItem: any) => {
+          const { amount, price } = cartItem;
+          // eslint-disable-next-line
+          total.totalItems += amount;
+          // eslint-disable-next-line
+          total.totalAmount += price * amount;
+
+          return total;
+        },
+        {
+          totalItems: 0,
+          totalAmount: 0,
+        },
+      );
+      return { ...state, totalItems, totalAmount };
+    }
+
     default:
       throw new Error(`No Matching "${action.type}" - action type`);
   }
