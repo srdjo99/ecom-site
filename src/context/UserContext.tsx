@@ -21,10 +21,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, loginWithRedirect, logout, user, isLoading } =
     useAuth0();
 
-  const [myUser, setMyUser] = useState(null);
+  const [myUser, setMyUser] = useState<any>(null);
 
   useEffect(() => {
-    console.log(user, isAuthenticated, isLoading);
+    if (isAuthenticated) {
+      setMyUser(user);
+    } else {
+      setMyUser(false);
+    }
   }, [isAuthenticated]);
 
   return (

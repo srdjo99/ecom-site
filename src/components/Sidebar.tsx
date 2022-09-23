@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
 import { FaTimes } from 'react-icons/fa';
+
 import styled from 'styled-components';
+
 import { useProductsContext } from '../context/ProductsContext';
+import { useUserContext } from '../context/UserContext';
 import { links } from '../utils/constants';
 import CartButtons from './CartButtons';
 
@@ -11,6 +13,7 @@ import logo from '../assets/logo.svg';
 
 const Sidebar: React.FC = () => {
   const { isSidebarOpen, openSidebar, closeSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
 
   return (
     <SidebarContainer>
@@ -33,11 +36,13 @@ const Sidebar: React.FC = () => {
               </li>
             );
           })}
-          <li>
-            <Link to="/checkout" onClick={closeSidebar}>
-              checkout
-            </Link>
-          </li>
+          {myUser && (
+            <li>
+              <Link to="/checkout" onClick={closeSidebar}>
+                checkout
+              </Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </aside>

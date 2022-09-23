@@ -12,13 +12,13 @@ import { UserProvider } from './context/UserContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth0Provider
-      domain={`${process.env.REACT_APP_STORE_DOMAIN}`}
-      clientId={`${process.env.REACT_APP_STORE_CLIENT_ID}`}
-      redirectUri={window.location.origin}
-      cachLocation="localstorage"
-    >
-      <Router>
+    <Router>
+      <Auth0Provider
+        domain={`${process.env.REACT_APP_STORE_DOMAIN}`}
+        clientId={`${process.env.REACT_APP_STORE_CLIENT_ID}`}
+        redirectUri={window.location.origin}
+        cacheLocation="localstorage"
+      >
         <UserProvider>
           <ProductsProvider>
             <FilterProvider>
@@ -28,8 +28,8 @@ ReactDOM.render(
             </FilterProvider>
           </ProductsProvider>
         </UserProvider>
-      </Router>
-    </Auth0Provider>
+      </Auth0Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root'),
 );
