@@ -78,13 +78,19 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   // remove item
-  const removeItem = (id: string) => {};
+  const removeItem = (id: string) => {
+    dispatch({ type: REMOVE_CART_ITEM, payload: id });
+  };
 
   // toggle amount
-  const toggleAmount = (id: string, value: any) => {};
+  const toggleAmount = (id: string, value: any) => {
+    dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, value } });
+  };
 
   // clear cart
-  const clearCart = () => {};
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(state.cart));
