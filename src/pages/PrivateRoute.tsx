@@ -5,10 +5,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useUserContext } from '../context/UserContext';
 
 const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const { myUser, isLoading } = useUserContext();
+  const { user } = useAuth0();
 
-  if (isLoading) return <h1>Spinner</h1>;
-
-  return myUser ? children : <Navigate to="/" replace />;
+  return user ? children : <Navigate to="/" />;
 };
 export default PrivateRoute;
