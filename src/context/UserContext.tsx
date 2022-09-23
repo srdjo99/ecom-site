@@ -3,11 +3,13 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 type UserContextProps = {
   myUser: any;
+  isLoading: any;
   loginWithRedirect: () => void;
   logout: (obj: any) => void;
 };
 
 const defaultUserContextValues = {
+  isLoading: null,
   myUser: null,
   loginWithRedirect: () => {},
   logout: (obj: any) => {},
@@ -32,7 +34,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   }, [isAuthenticated]);
 
   return (
-    <UserContext.Provider value={{ myUser, loginWithRedirect, logout }}>
+    <UserContext.Provider
+      value={{ isLoading, myUser, loginWithRedirect, logout }}
+    >
       {children}
     </UserContext.Provider>
   );
