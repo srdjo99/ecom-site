@@ -42,13 +42,13 @@ const SingleProductPage = () => {
     fetchSingleProduct(`${url}${id}`);
   }, [id]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     setTimeout(() => {
-  //       navigate('/');
-  //     }, 3000);
-  //   }
-  // }, [error]);
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+    }
+  }, [error]);
 
   if (loading) return <Loading />;
 
