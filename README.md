@@ -1,22 +1,23 @@
-## Notes
+# E-commerce website
 
-#### Older React Version
+## About
 
-```
-"react": "^16.13.1",
-"react-dom": "^16.13.1",
-"react-scripts": "3.4.3",
-```
+It is basic e-commerce store which has a Stripe as payment processor ( test phase ).
 
-#### Current React Version
+### [e-comm - link](https://srdjan-ecom-react-site.netlify.app)
 
-```
-"react": "^17.0.1",
-"react-dom": "^17.0.1",
-"react-scripts": "4.0.0",
-```
 
-#### Alternative fix
+## Available Scripts
 
-.env file in the root
-FAST_REFRESH=FALSE
+If you want to spin it up locally, you can run:
+
+### `npm install`
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console
+
